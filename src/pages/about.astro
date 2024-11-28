@@ -9,6 +9,8 @@ const identity = {
 	hobbies: ["Reading", "Coding", "fishing"],
 };
 const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+const bio =
+	"As a full-stack developer, I have a passion for creating dynamic and responsive websites. I am a self-taught developer with a strong background in both frontend and backend development.";
 const happy = true;
 const finished = true;
 const goal = 3;
@@ -40,6 +42,7 @@ const textCase = "uppercase";
 			}
 		</style>
 		<BaseLayout pageTitle={pageTitle}>
+			<p>{bio}</p>
 			<p>Here are a few facts about me:</p>
 			<ul>
 				<li>My name is {identity.firstName}.</li>

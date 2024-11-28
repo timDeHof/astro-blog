@@ -4,16 +4,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Greeting from "../components/Greeting";
 const featuredPosts = await getCollection("posts");
 const pageTitle = "Welcome to My Blog";
+const pageDescription =
+	"I'm a developer who loves learning new things and sharing my knowledge with others.";
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout pageTitle={pageTitle} pageDescription={pageDescription}>
 	<main>
 		<section class='hero'>
 			<div class='hero-content'>
-				<p>
-					I'm a developer who loves learning new things and sharing my knowledge
-					with others.
-				</p>
 				<div class='cta-buttons'>
 					<a href='/blog' class='button primary'> Read Latest Posts </a>
 					<a href='/about' class='button secondary'> About Me </a>
