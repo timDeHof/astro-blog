@@ -1,13 +1,64 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Greeting from "../components/Greeting.jsx";
-const pageTitle = "Home Page";
+import Greeting from "../components/Greeting";
+const featuredPosts = await getCollection("posts");
+const pageTitle = "Welcome to My Blog";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-	<h2>My awesome blog subtitle</h2>
-	<Greeting
-		client:load
-		messages={["Hello", "Hi", "Hey", "Hola", "Bonjour", "Ciao"]}
-	/>
+	<main>
+		<section class='hero'>
+			<div class='hero-content'>
+				<p>
+					I'm a developer who loves learning new things and sharing my knowledge
+					with others.
+				</p>
+				<div class='cta-buttons'>
+					<a href='/blog' class='button primary'> Read Latest Posts </a>
+					<a href='/about' class='button secondary'> About Me </a>
+				</div>
+			</div>
+		</section>
+		<!-- Featured Posts Section -->
+		<section class='featured-posts'>
+			<h2>Featured Posts</h2>
+			<div class='posts-grid'>
+				{
+					featuredPosts.map((post) => (
+						<article class='post-card'>
+							<div class='post-image'>
+								<img
+									src={post.data.image.url}
+									alt={post.data.title}
+									width='400'
+									height='200'
+								/>
+							</div>
+							<div class='post-content'>
+								<h3>{post.data.title}</h3>
+								<p>{post.data.description}</p>
+								<div class='post-meta'>
+									<time datetime={post.data.pubDate.toISOString()}>
+										{new Date(post.data.pubDate).toLocaleDateString("en-US", {
+											year: "numeric",
+											month: "long",
+											day: "numeric",
+										})}
+									</time>
+								</div>
+								<a href={`/posts/${post.slug}`} class='read-more'>
+									Read More →
+								</a>
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</section>
+		<Greeting
+			client:load
+			messages={["Hello", "Hi", "Hey", "Hola", "Bonjour", "Ciao"]}
+		/>
+	</main>
 </BaseLayout>
